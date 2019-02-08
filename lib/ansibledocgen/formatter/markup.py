@@ -28,17 +28,17 @@ class MarkupFormatter(object):
         """ Write Each Individual Markup File """
         for sourcefile in self.parserdata:
             self.write_doc(sourcefile)
-            
+
     def __create_task_info_structure__(self, sourcefile):
         '''
-        @author: Y_mil        
+        @author: Y_mil
         @contact: lylinquiman@gmail.com
         @param sourcefile: sourcefile type
         @return: All task name and tags in order for create markup
         @rtype: list
-        This Function go through all taks and create the list for create markup        
+        This Function go through all taks and create the list for create markup
         '''
-        list_data = []        
+        list_data = []
         for task_info in sourcefile['task_info']:
             print(task_info['task_name'])
             list_data.append(
@@ -47,7 +47,7 @@ class MarkupFormatter(object):
                  list_data.append(u"> - **Tags:** %s\n\n" % \
                                   (", ".join(task_info['task_tags'])))
         return list_data
-            
+
     def write_doc(self, sourcefile):
         """ @sourcefile is a dictionary, example:
               { "author": "", "description": "", "task_names": "", .....}
@@ -78,7 +78,7 @@ class MarkupFormatter(object):
                     sourcefile, roledir, "description", is_role=True)
                 if "task_info" in sourcefile:
                     self.role_outfiles[roledir] += self.__create_task_info_structure__(sourcefile)
-                        
+
             self.role_outfiles[roledir].append("\n")
         # Parse a Playbook
         else:
@@ -93,7 +93,7 @@ class MarkupFormatter(object):
             self.write_attribute(sourcefile, playbookpath, "author")
             self.write_attribute(sourcefile, playbookpath, "description")
             if "task_info" in sourcefile:
-                self.playbook_outfiles[playbookpath] += self.__create_task_info_structure__(sourcefile)                             
+                self.playbook_outfiles[playbookpath] += self.__create_task_info_structure__(sourcefile)
             self.playbook_outfiles[playbookpath].append("\n")
 
     def write_attribute(self, sourcefile, path, attribute, is_role=False):
