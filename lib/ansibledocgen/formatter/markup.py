@@ -41,10 +41,13 @@ class MarkupFormatter(object):
         for task_info in sourcefile['task_info']:
             print(task_info['task_name'])
             list_data.append(
-                u"> **Task:** %s\n\n" % task_info['task_name'])
+                u":hammer: %s\n\n" % task_info['task_name'])
             if not task_info['task_tags'] == None and self.params['show_tags']:
-                 list_data.append(u"> - **Tags:** %s\n\n" % \
+                 list_data.append(u"- **Tags:** %s\n\n" % \
                                   (", ".join(task_info['task_tags'])))
+            if not task_info['task_with_items'] == None and self.params['show_with_items']:
+                 list_data.append(u"> **With items:** \n> - %s\n\n" % \
+                                  ("\n> - ".join(task_info['task_with_items'])))
         return list_data
 
     def write_doc(self, sourcefile):

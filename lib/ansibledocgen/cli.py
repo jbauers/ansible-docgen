@@ -27,6 +27,11 @@ class Cli(object):
                           help="This option disables show tags in the documentation",
                           metavar="TAGS",
                           default=True)
+        parser.add_option("--no-items", dest="show_with_items",
+                          action='store_false',
+                          help="This option disables show with_items in the documentation",
+                          metavar="WITH_ITEMS",
+                          default=True)
         (options, args) = parser.parse_args()
 
         # Make sure there is a trailing /
@@ -34,6 +39,7 @@ class Cli(object):
         self.style = options.style
         self.params = {}
         self.params['show_tags'] = options.show_tags
+        self.params['show_with_items'] = options.show_with_items
 
         # Used to Parse Roles and Playbooks
         self.dirparser = None

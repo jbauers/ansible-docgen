@@ -25,25 +25,28 @@ class PlaybookParser(object):
 
     def __get_task_info__(self, task):
         '''
-        @author: Y_mil        
+        @author: Y_mil
         @contact: lylinquiman@gmail.com
         @param task: variable task type
         @return: {'task_name': 'xxx', 'task_tags': ['xxx' | None ]} \
             or false in case the no have the name task
         @rtype: dict or boolean
-        This Function go through all task and create the dict with task name \ 
-        and tags. In this function is possibly adding more variables.        
+        This Function go through all task and create the dict with task name \
+        and tags. In this function is possibly adding more variables.
         '''
         if "name" in task:
-            task_info = {'task_name': None, 'task_tags': None}
-            task_name = task["name"]            
+            task_info = {'task_name': None, 'task_tags': None, 'task_with_items': None}
+            task_name = task["name"]
             task_info["task_name"] = task_name
             if "tags" in task:
                 if not task["tags"] == None:
                     task_info["task_tags"] = task["tags"]
+            if "with_items" in task:
+                if not task["with_items"] == None:
+                    task_info["task_with_items"] = task["with_items"]
             return task_info
         return False
-    
+
     def parse_playbook(self, playbook):
         """ Parse an Individual Playbook """
         with codecs.open(playbook, "r", encoding="utf-8") as f:
